@@ -1,1 +1,129 @@
-{{ survey.q01_products }}
+<html>
+    <head>
+        <title>FAIR Matrix</title>
+        <style>
+            table, th, td {
+              border: 1px solid black;
+              border-collapse: collapse;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>FAIR Matrix</h1>
+        <p>
+            Based on your responses, the following recommendations are included 
+            for your consideration and/or inclusion in your project’s Data 
+            Management Plan.
+        </p>
+        <h3>Types of Data</h3>
+        <p>
+            Research objects associated with the project can be classified into the 
+            following groups:
+            <ul>
+                {% for product in survey.q01_products_list %}
+                    <li>{{ product }}</li>
+                {% endfor %}
+            </ul>
+        </p>
+        <h3>Data Stewardship Practices Planned</h3>
+        <p>
+            Table 1 shows specific data stewardship actions that will be undertaken
+            during the project as they relate to the high-level goals of FAIR.
+        </p>
+        <table>
+            <tr>
+                <th>FAIR Dimension</th>
+                <th>Research Data Stewardship Practices Planned</th>
+            </tr>
+            <tr>
+                <td>Findable</td>
+                <td>
+                    <ul>
+                        <li>Research products will be posted to 
+                            {% for products_post in survey.q05_products_posted_list %}{% if not forloop.first %}{% if forloop.last %} and {% else %}, {% endif %}{% endif %}{{ products_post }}{% endfor %}.
+                            {% if "Simulation Data" in survey.q01_products_list %}
+                                Simulations will include {{ survey.q06_simulations }}.
+                            {% endif %}
+                        </li>
+                        <li>Data will be assigned a unique identifier per community best practices and will be referenced on the &lt; &gt; website.</li>
+                        <li>A catalog entry will be added to SDSC’s FAIR Data Point.</li>
+                        <li>Metadata and links to related ontologies will be available on the {{ survey.q02_project_name }} website.</li>
+                        <li>Where tags exist, schema.org descriptors will be utilized.</li>
+                        {% if survey.q15_input_data_list %}
+                        <li>Input data will be in the following formats: {% for input in survey.q15_input_data_list %}{% if not forloop.first %}{% if forloop.last %} and {% else %}, {% endif %}{% endif %}{{ input }}{% endfor %}</li>
+                        {% endif %}
+                        {% if survey.q15_output_data_list %}
+                        <li>Output data will be in the following formats: {% for output in survey.q15_output_data_list %}{% if not forloop.first %}{% if forloop.last %} and {% else %}, {% endif %}{% endif %}{{ output }}{% endfor %}</li>
+                        {% endif %}
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Accessible</td>
+                <td>
+                    <ul>
+                        <li>Available via SDSC Cloud (object store), 
+                            {% if "No" in survey.q12_specialized_software %} that doesn’t require specialized software to access. {% else %} The software needed to access the project’s research objects can be obtained from {{ survey.q12_specialized_software_specify }}.{% endif %} 
+                            {% if "Yes" in survey.q11_specialized_software_open_source %} This software is open source.{% endif %}</li>
+                        <li>Any APIs will be versioned and described, linked from the &lt;&gt; website.</li>
+                        {% if "Yes" in survey.q09_open_data %}
+                        <li>All data is open.</li>
+                        {% endif %}
+                        {% if "Yes" in survey.q13_existing_libraries %}
+                        <li>The project software is built on existing libraries.</li>
+                        {% endif %}
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Interoperable</td>
+                <td>
+                    <ul>
+                        <li>Code stored on github (and linked from the {{ survey.q02_project_name }} website).</li>
+                        <li>Uses libraries from &lt;&gt; that utilize xyz standard &lt;or standard Python libraries, etc.&gt;.</li>
+                        <li>Uses standard references for astronomical bodies &lt;more here&gt;.</li>
+                        <li>Uses &lt;some standard way of describing shapes in geo specific way&gt;.</li>
+                        <li>Both input and output data are in HDF5 format.</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Reusable</td>
+                <td>
+                    <ul>
+                        <li>ML model and data will be deposited at OpenML.org.</li>
+                        <li>Notebooks will demonstrate how to assemble model and sample training datasets. Each notebook product will be assigned a DOI.</li>
+                        {% if survey.q14_nano_publications %}
+                        <li>Notebooks, nanopublications, annotations, or other semantic descriptions will be published at {{ survey.q14_nano_publications }}.</li>
+                        {% endif %}
+                        <li>The &lt;&gt; notebook interface is on github.</li>
+                        <li>Provenance of the simulation creation will be available as part of the metadata.</li>
+                        <li>A notice posted will designate research objects as licensed under 
+                            {% if "Other" in survey.q07_license %} 
+                                {% if survey.q08_license_other_institutional %}{{ survey.q08_license_other_institutional}}{% endif %}
+                                {% if survey.q08_license_other_none %}{{ survey.q08_license_other_none}}{% endif %}
+                            {% else %}
+                                <a href="https://creativecommons.org/about/cclicenses/">{{ survey.q07_license }}</a>
+                            {% endif %}.
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <p>
+            Table 1: Data Stewardship Practices Planned by FAIR Dimension
+        </p>
+        {% if "Yes" in survey.q10_indigenous_populations %}
+        <h3>Ethical Dimensions</h3>
+        <p>
+            Data and other research outputs will be created, used, and managed with respect to the <a href="https://www.gida-global.org/care">CARE Principles of Indigenous Data Governance</a>. This includes ensuring that data ecosystems will be designed to enable Indigenous Peoples to derive benefit. The project team recognizes the 
+            <ul>
+                <li>Rights and interests Indigenous People have over their data, that they have a right to govern their data.</li>
+                <li>Responsibility to ensure positive relationships and to engage in ways that expand capabilities and capacity where possible, as well as to make research outputs available in the Indigenous language if applicable and possible.</li>
+                <li>Ethics needed to ensure the primary concern at all stages of research are the rights and wellbeing of Indigenous Peoples.</li>
+            </ul>    
+        </p>
+        {% endif %}
+    </body>
+</html>
+

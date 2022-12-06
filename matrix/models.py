@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 class Survey(models.Model):
@@ -37,6 +39,7 @@ class Survey(models.Model):
     q15_data_formats_spreadsheet = models.CharField(
         max_length=256, default="", blank=True
     )
+    q64_email_address = models.CharField(max_length=256, default="", blank=True)
     time_stamp = models.DateTimeField(auto_now_add=True)
 
     def q01_products_list(self):
@@ -114,3 +117,21 @@ class Survey(models.Model):
             output.append(self.q15_data_formats_other_value)
 
         return output
+
+    def save(self, *args, **kwargs):
+
+        # Save the results of the survey to the database
+        super(Survey, self).save(*args, **kwargs)
+
+        # Get the primary key of the survey and create the survey url
+        survey_url = "http://%s/matrix/%s/" % (settings.DOMAIN_NAME, str(self.pk))
+
+        print("New survey sent: %s" % survey_url)
+
+        send_mail(
+            "Link to Fair Data Survey",
+            "Survey URL: %s" % survey_url,
+            settings.DEFAULT_FROM_EMAIL,
+            [self.q64_email_address],
+            fail_silently=settings.EMAIL_FAIL_SILENTLY,
+        )

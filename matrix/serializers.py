@@ -29,5 +29,6 @@ class SurveySerializer(serializers.HyperlinkedModelSerializer):
             "q15_data_formats_other",
             "q15_data_formats_other_value",
             "q15_data_formats_spreadsheet",
+            "q64_email_address",
             "time_stamp",
         ]

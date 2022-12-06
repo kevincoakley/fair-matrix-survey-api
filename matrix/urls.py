@@ -9,5 +9,5 @@ urlpatterns = [
     path("", views.index, name="index"),
     path("api/", include(router.urls)),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
-    path("<int:survey_id>/", views.detail, name="detail"),
+    path("<str:survey_id>/", views.detail, name="detail"),
 ]

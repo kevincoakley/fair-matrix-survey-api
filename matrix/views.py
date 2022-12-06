@@ -10,7 +10,7 @@ def index(request):
 
 
 def detail(request, survey_id):
-    survey = get_object_or_404(Survey, pk=survey_id)
+    survey = get_object_or_404(Survey, random_id=survey_id)
     return render(request, "matrix/detail.html", {"survey": survey})
 
 

@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.mail import send_mail
 from django.conf import settings
+import uuid
 
 
 class Survey(models.Model):
@@ -40,6 +41,7 @@ class Survey(models.Model):
         max_length=256, default="", blank=True
     )
     q64_email_address = models.CharField(max_length=256, default="", blank=True)
+    random_id = models.CharField(max_length=256, default="", blank=True)
     time_stamp = models.DateTimeField(auto_now_add=True)
 
     def q01_products_list(self):
@@ -120,11 +122,17 @@ class Survey(models.Model):
 
     def save(self, *args, **kwargs):
 
+        # Generate a random id for the survey
+        self.random_id = uuid.uuid4()
+
         # Save the results of the survey to the database
         super(Survey, self).save(*args, **kwargs)
 
         # Get the primary key of the survey and create the survey url
-        survey_url = "http://%s/matrix/%s/" % (settings.DOMAIN_NAME, str(self.pk))
+        survey_url = "http://%s/matrix/%s/" % (
+            settings.DOMAIN_NAME,
+            str(self.random_id),
+        )
 
         print("New survey sent: %s" % survey_url)
 

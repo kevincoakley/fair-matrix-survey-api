@@ -45,7 +45,7 @@
                                 Simulations will include {{ survey.q06_simulations }}.
                             {% endif %}
                         </li>
-                        <li>Data will be assigned a unique identifier per community best practices and will be referenced on the &lt; &gt; website.</li>
+                        <li>Data will be assigned a unique identifier per community best practices and will be referenced on the project's website.</li>
                         <li>A catalog entry will be added to SDSC’s FAIR Data Point.</li>
                         <li>Metadata and links to related ontologies will be available on the {{ survey.q02_project_name }} website.</li>
                         <li>Where tags exist, schema.org descriptors will be utilized.</li>
@@ -65,7 +65,7 @@
                         <li>Available via SDSC Cloud (object store), 
                             {% if "No" in survey.q12_specialized_software %} that doesn’t require specialized software to access. {% else %} The software needed to access the project’s research objects can be obtained from {{ survey.q12_specialized_software_specify }}.{% endif %} 
                             {% if "Yes" in survey.q11_specialized_software_open_source %} This software is open source.{% endif %}</li>
-                        <li>Any APIs will be versioned and described, linked from the &lt;&gt; website.</li>
+                        <li>Any APIs will be versioned and described, linked from the project's website.</li>
                         {% if "Yes" in survey.q09_open_data %}
                         <li>All data is open.</li>
                         {% endif %}
@@ -80,9 +80,7 @@
                 <td>
                     <ul>
                         <li>Code stored on github (and linked from the {{ survey.q02_project_name }} website).</li>
-                        <li>Uses libraries from &lt;&gt; that utilize xyz standard &lt;or standard Python libraries, etc.&gt;.</li>
-                        <li>Uses standard references for astronomical bodies &lt;more here&gt;.</li>
-                        <li>Uses &lt;some standard way of describing shapes in geo specific way&gt;.</li>
+                        <li>Uses libraries included with the code.</li>
                         <li>Both input and output data are in HDF5 format.</li>
                     </ul>
                 </td>
@@ -96,7 +94,7 @@
                         {% if survey.q14_nano_publications %}
                         <li>Notebooks, nanopublications, annotations, or other semantic descriptions will be published at {{ survey.q14_nano_publications }}.</li>
                         {% endif %}
-                        <li>The &lt;&gt; notebook interface is on github.</li>
+                        <li>The notebook interface is on github.</li>
                         <li>Provenance of the simulation creation will be available as part of the metadata.</li>
                         <li>A notice posted will designate research objects as licensed under 
                             {% if "Other" in survey.q07_license %} 

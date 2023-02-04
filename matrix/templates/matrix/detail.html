@@ -52,9 +52,19 @@
                         {% if "Data" in survey.q01_products %}
                         <li>Data DOIs will be obtained {{ survey.q04_doi }}</li>
                         {% endif %}
-                        <li>A catalog entry will be added to SDSC’s FAIR Data Point.</li>
                         <li>Metadata and links to related ontologies will be available on the {{ survey.q02_project_name }} website.</li>
-                        <li>Where tags exist, schema.org descriptors will be utilized.</li>
+                        {% if "Yes" in survey.q30_schema_org %}
+                        <li>The website where the data is posted to or linked from will include schema.org tags.</li>
+                        {% endif %}
+                        {% if "Yes and science-on-schema" in survey.q30_schema_org %}
+                        <li>The website where the data is posted to or linked from will include schema.org and science-on-schema tags.</li>
+                        {% endif %}
+                        {% if "Yes and bioschemas" in survey.q30_schema_org %}
+                        <li>The website where the data is posted to or linked from will include schema.org and bioschema tags.</li>
+                        {% endif %}
+                        {% if "Yes and ocean info hub" in survey.q30_schema_org %}
+                        <li>The website where the data is posted to or linked from will include schema.org and ocean info hub tags.</li>
+                        {% endif %}
                         {% if survey.q15_input_data_list %}
                         <li>Input data will be in the following formats: {% for input in survey.q15_input_data_list %}{% if not forloop.first %}{% if forloop.last %} and {% else %}, {% endif %}{% endif %}{{ input }}{% endfor %}</li>
                         {% endif %}
@@ -85,9 +95,10 @@
                 <td>Interoperable</td>
                 <td>
                     <ul>
+                         {% if "Software and Associated Documentation" in survey.q01_products %}
                         <li>Code stored on github (and linked from the {{ survey.q02_project_name }} website).</li>
-                        <li>Uses libraries included with the code.</li>
-                        <li>Both input and output data are in HDF5 format.</li>
+                        {% endif %}
+                        <!-- <li>Both input and output data are in HDF5 format.</li> -->
                     </ul>
                 </td>
             </tr>

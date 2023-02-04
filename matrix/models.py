@@ -7,6 +7,7 @@ import uuid
 class Survey(models.Model):
     q01_products = models.CharField(max_length=256, default="", blank=True)
     q02_project_name = models.CharField(max_length=256, default="", blank=True)
+    q04_doi = models.CharField(max_length=256, default="", blank=True)
     q05_products_posted = models.CharField(max_length=256, default="", blank=True)
     q05_products_posted_other = models.CharField(max_length=256, default="", blank=True)
     q06_simulations = models.CharField(max_length=256, default="", blank=True)

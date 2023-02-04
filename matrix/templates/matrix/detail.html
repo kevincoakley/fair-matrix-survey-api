@@ -14,7 +14,7 @@
         <p>
             Based on your responses, the following recommendations are included 
             for your consideration and/or inclusion in your project’s Data 
-            Management Plan.
+            Management (& Sharing) Plan.
         </p>
         <h3>Types of Data</h3>
         <p>
@@ -29,7 +29,7 @@
         <h3>Data Stewardship Practices Planned</h3>
         <p>
             Table 1 shows specific data stewardship actions that will be undertaken
-            during the project as they relate to the high-level goals of FAIR.
+            during the project as they relate to the high-level goals of FAIR and open science.
         </p>
         <table>
             <tr>
@@ -46,7 +46,12 @@
                                 Simulations will include {{ survey.q06_simulations }}.
                             {% endif %}
                         </li>
-                        <li>Data will be assigned a unique identifier per community best practices and will be referenced on the project's website.</li>
+                        {% if "Data" in survey.q01_products %}
+                        <li>Data will be assigned a unique identifier.</li>
+                        {% endif %}
+                        {% if "Data" in survey.q01_products %}
+                        <li>Data DOIs will be obtained {{ survey.q04_doi }}</li>
+                        {% endif %}
                         <li>A catalog entry will be added to SDSC’s FAIR Data Point.</li>
                         <li>Metadata and links to related ontologies will be available on the {{ survey.q02_project_name }} website.</li>
                         <li>Where tags exist, schema.org descriptors will be utilized.</li>

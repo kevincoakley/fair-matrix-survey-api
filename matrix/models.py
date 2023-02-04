@@ -40,6 +40,18 @@ class Survey(models.Model):
     q15_data_formats_spreadsheet = models.CharField(
         max_length=256, default="", blank=True
     )
+    q16_notebooks_shared = models.CharField(max_length=256, default="", blank=True)
+    q17_notebooks_template = models.CharField(max_length=256, default="", blank=True)
+    q18_software_license = models.CharField(max_length=256, default="", blank=True)
+    q19_api = models.CharField(max_length=256, default="", blank=True)
+    q33_smart_api = models.CharField(max_length=256, default="", blank=True)
+    q20_api_versioned = models.CharField(max_length=256, default="", blank=True)
+    q22_ML_code = models.CharField(max_length=256, default="", blank=True)
+    q26_ML_models_shared = models.CharField(max_length=256, default="", blank=True)
+    q25_ML_repro = models.CharField(max_length=256, default="", blank=True)
+    q28_dmp = models.CharField(max_length=256, default="", blank=True)
+    q29_register_repo = models.CharField(max_length=256, default="", blank=True)
+    q30_schema_org = models.CharField(max_length=256, default="", blank=True)
     q64_email_address = models.CharField(max_length=256, default="", blank=True)
     random_id = models.CharField(max_length=256, default="", blank=True)
     time_stamp = models.DateTimeField(auto_now_add=True)

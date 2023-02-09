@@ -71,6 +71,12 @@
                         {% if survey.q15_output_data_list %}
                         <li>Output data will be in the following formats: {% for output in survey.q15_output_data_list %}{% if not forloop.first %}{% if forloop.last %} and {% else %}, {% endif %}{% endif %}{{ output }}{% endfor %}</li>
                         {% endif %}
+                        {% if survey.q29_register_repo %}
+                        <li>The repository will be registered via {{ survey.q29_register_repo }}.</li>
+                        {% endif %}
+                        {% if survey.q30_schema_org %}
+                        <li>Webpages (HTML) that list the datasets will include schema.org tags {{ survey.q30_schema_org }}.</li>
+                        {% endif %}
                     </ul>
                 </td>
             </tr>
@@ -81,7 +87,16 @@
                         <li>Available from an open web accessible folder. <!-- 
                             {% if "No" in survey.q12_specialized_software %} that doesn’t require specialized software to access. {% else %} The software needed to access the project’s research objects can be obtained from {{ survey.q12_specialized_software_specify }}.{% endif %} 
                             {% if "Yes" in survey.q11_specialized_software_open_source %} This software is open source.{% endif %}--></li>
-                        <li>Any APIs will be versioned and described, linked from the project's website.</li>
+                        
+                        {% if "Yes" in survey.q19_api %}
+                        <li>An API is provided. </li> 
+                        {% endif %}
+                        {% if "Yes" in survey.q20_api_versioned %}
+                        <li>The API is versioned. </li> 
+                        {% endif %}
+                        {% if "Yes" in survey.q233_smart_api %}
+                        <li>The API is a Smart API. </li> 
+                        {% endif %}
                         {% if "Yes" in survey.q09_open_data %}
                         <li>All data is open.</li>
                         {% endif %}
@@ -126,6 +141,7 @@
                         {% endif %}
                         {% if survey.q6_simulations %}
                         <li>For all simulations, {{ survey.survey.q6_simulations }}.</li>
+                        {% endif %}
                         <li>A notice posted will designate research objects as licensed under 
                             {% if "Other" in survey.q07_license %} 
                                 {% if survey.q08_license_other_institutional %}{{ survey.q08_license_other_institutional}}{% endif %}
@@ -133,6 +149,9 @@
                             {% else %}
                                 <a href="https://creativecommons.org/about/cclicenses/">{{ survey.q07_license }}</a>
                             {% endif %}.
+                            {% if survey.q25_ML_repro %}
+                        <li>Reproducibility implementation considerations for documenting analysis that includes ML will include {{ survey.q25_ML_repro }}.</li>
+                        {% endif %}
                         </li>
                     </ul>
                 </td>

@@ -88,6 +88,12 @@
                         {% if "Yes" in survey.q13_existing_libraries %}
                         <li>The project software is built on existing libraries.</li>
                         {% endif %}
+                        {% if survey.q22_ML_code %}
+                        <li>ML code/software will be deposited at {{ survey.q22_ML_code }}.</li>
+                        {% endif %}
+                        {% if survey.q27_ML_data_shared %}
+                        <li>ML datasets will be shared on {{ q27_ML_data_shared }}.</li>
+                        {% endif %}
                     </ul>
                 </td>
             </tr>
@@ -106,13 +112,20 @@
                 <td>Reusable</td>
                 <td>
                     <ul>
-                        <li>ML model and data will be deposited at OpenML.org.</li>
-                        <li>Notebooks will demonstrate how to assemble model and sample training datasets. Each notebook product will be assigned a DOI.</li>
+                        {% if survey.q26_ML_models_shared %}
+                        <li>ML models will be shared on {{ survey.q26_ML_models_shared }}.</li>
+                        {% endif %}
+                        {% if survey.q16_notebooks_shared %}
+                        <li>Notebooks will be {{ survey.q16_notebooks_shared }}.</li> 
+                        {% endif %} 
+                        {% if survey.q17_notebooks_template %}
+                        <li>Notebooks will be based on a notebook template.</li> 
+                        {% endif %} 
                         {% if survey.q14_nano_publications %}
                         <li>Notebooks, nanopublications, annotations, or other semantic descriptions will be published at {{ survey.q14_nano_publications }}.</li>
                         {% endif %}
-                        <li>The notebook interface is on github.</li>
-                        <li>Provenance of the simulation creation will be available as part of the metadata.</li>
+                        {% if survey.q6_simulations %}
+                        <li>For all simulations, {{ survey.survey.q6_simulations }}.</li>
                         <li>A notice posted will designate research objects as licensed under 
                             {% if "Other" in survey.q07_license %} 
                                 {% if survey.q08_license_other_institutional %}{{ survey.q08_license_other_institutional}}{% endif %}
@@ -138,6 +151,9 @@
                 <li>Ethics needed to ensure the primary concern at all stages of research are the rights and wellbeing of Indigenous Peoples.</li>
             </ul>    
         </p>
+         {% if "Yes" in survey.q28_dmp %}       
+        <p> This plan will be shared. </p>
+        <!-- need to add the specific choice -->
         {% endif %}
     </body>
 </html>

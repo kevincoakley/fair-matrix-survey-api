@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("matrix", "0004_alter_survey_q01_products_and_more"),
     ]

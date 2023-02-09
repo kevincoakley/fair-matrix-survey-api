@@ -107,7 +107,6 @@ class Survey(models.Model):
         return [x.strip() for x in self.q15_data_formats_spreadsheet.split(",")]
 
     def q15_input_data_list(self):
-
         input = []
 
         if "input".casefold() in map(str.casefold, self.q15_data_formats_csv_list()):
@@ -130,7 +129,6 @@ class Survey(models.Model):
         return input
 
     def q15_output_data_list(self):
-
         output = []
 
         if "output".casefold() in map(str.casefold, self.q15_data_formats_csv_list()):
@@ -153,7 +151,6 @@ class Survey(models.Model):
         return output
 
     def save(self, *args, **kwargs):
-
         # Generate a random id for the survey
         self.random_id = uuid.uuid4()
 

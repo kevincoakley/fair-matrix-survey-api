@@ -47,9 +47,13 @@ class Survey(models.Model):
     q16_notebooks_shared = models.CharField(max_length=256, default="", blank=True)
     q16_notebooks_other = models.CharField(max_length=256, default="", blank=True)
     q17_notebooks_template = models.CharField(max_length=256, default="", blank=True)
-    q17_notebooks_template_other = models.CharField(max_length=256, default="", blank=True)
+    q17_notebooks_template_other = models.CharField(
+        max_length=256, default="", blank=True
+    )
     q18_software_license = models.CharField(max_length=256, default="", blank=True)
-    q18_software_license_other = models.CharField(max_length=256, default="", blank=True)
+    q18_software_license_other = models.CharField(
+        max_length=256, default="", blank=True
+    )
     q19_api = models.CharField(max_length=256, default="", blank=True)
     q33_smart_api = models.CharField(max_length=256, default="", blank=True)
     q20_api_versioned = models.CharField(max_length=256, default="", blank=True)
@@ -58,7 +62,9 @@ class Survey(models.Model):
     q26_ML_models_shared = models.CharField(max_length=256, default="", blank=True)
     q26_ML_models_other = models.CharField(max_length=256, default="", blank=True)
     q25_ML_repro = models.CharField(max_length=256, default="", blank=True)
-    q25_ML_repro_consider_other = models.CharField(max_length=256, default="", blank=True)
+    q25_ML_repro_consider_other = models.CharField(
+        max_length=256, default="", blank=True
+    )
     q27_domain_repo_other = models.CharField(max_length=256, default="", blank=True)
     q28_dmp = models.CharField(max_length=256, default="", blank=True)
     q28_yes_specify = models.CharField(max_length=256, default="", blank=True)

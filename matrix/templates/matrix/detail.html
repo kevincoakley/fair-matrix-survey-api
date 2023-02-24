@@ -40,42 +40,24 @@
                 <td>Findable</td>
                 <td>
                     <ul>
-                        <li>Research products will be posted to 
+                        <li>Research products will be shared via 
                             {% for products_post in survey.q05_products_posted_list %}{% if not forloop.first %}{% if forloop.last %} and {% else %}, {% endif %}{% endif %}{{ products_post }}{% endfor %}.
-                            {% if "Simulation Data" in survey.q01_products_list %}
-                                Simulations will include {{ survey.q06_simulations }}.
-                            {% endif %}
+                            
                         </li>
                         {% if "Data" in survey.q01_products %}
-                        <li>Data will be assigned a unique identifier.</li>
+                        <li>Data will be assigned a unique identifier {{ survey.q04_doi }}.</li>
                         {% endif %}
-                        {% if "Data" in survey.q01_products %}
-                        <li>Data DOIs will be obtained {{ survey.q04_doi }}</li>
-                        {% endif %}
-                        <li>Metadata and links to related ontologies will be available on the {{ survey.q02_project_name }} website.</li>
                         {% if "Yes" in survey.q30_schema_org %}
-                        <li>The website where the data is posted to or linked from will include schema.org tags.</li>
+                        <li>The website where the data is posted to or linked from will include schema.org {{ survey.q30_schema_org }} tags.</li>
                         {% endif %}
                         {% if "Yes and science-on-schema" in survey.q30_schema_org %}
                         <li>The website where the data is posted to or linked from will include schema.org and science-on-schema tags.</li>
                         {% endif %}
-                        {% if "Yes and bioschemas" in survey.q30_schema_org %}
-                        <li>The website where the data is posted to or linked from will include schema.org and bioschema tags.</li>
-                        {% endif %}
-                        {% if "Yes and ocean info hub" in survey.q30_schema_org %}
-                        <li>The website where the data is posted to or linked from will include schema.org and ocean info hub tags.</li>
-                        {% endif %}
-                        {% if survey.q15_input_data_list %}
-                        <li>Input data will be in the following formats: {% for input in survey.q15_input_data_list %}{% if not forloop.first %}{% if forloop.last %} and {% else %}, {% endif %}{% endif %}{{ input }}{% endfor %}</li>
-                        {% endif %}
-                        {% if survey.q15_output_data_list %}
-                        <li>Output data will be in the following formats: {% for output in survey.q15_output_data_list %}{% if not forloop.first %}{% if forloop.last %} and {% else %}, {% endif %}{% endif %}{{ output }}{% endfor %}</li>
-                        {% endif %}
                         {% if survey.q29_register_repo %}
                         <li>The repository will be registered via {{ survey.q29_register_repo }}.</li>
                         {% endif %}
-                        {% if survey.q30_schema_org %}
-                        <li>Webpages (HTML) that list the datasets will include schema.org tags {{ survey.q30_schema_org }}.</li>
+                        {% if survey.q14_nano_publications %}
+                        <li>Nanopublications, annotations, or other semantic descriptions will be published at {{ survey.q29_register_repo }}.</li>
                         {% endif %}
                     </ul>
                 </td>
@@ -84,10 +66,21 @@
                 <td>Accessible</td>
                 <td>
                     <ul>
+                        {% if survey.q15_input_data_list %}
+                        <li>Input data will be in the following formats: {% for input in survey.q15_input_data_list %}{% if not forloop.first %}{% if forloop.last %} and {% else %}, {% endif %}{% endif %}{{ input }}{% endfor %}</li>
+                        {% endif %}
+                        {% if survey.q15_output_data_list %}
+                        <li>Output data will be in the following formats: {% for output in survey.q15_output_data_list %}{% if not forloop.first %}{% if forloop.last %} and {% else %}, {% endif %}{% endif %}{{ output }}{% endfor %}</li>
+                        {% endif %}
                         <li>Available from an open web accessible folder. <!-- 
                             {% if "No" in survey.q12_specialized_software %} that doesn’t require specialized software to access. {% else %} The software needed to access the project’s research objects can be obtained from {{ survey.q12_specialized_software_specify }}.{% endif %} 
                             {% if "Yes" in survey.q11_specialized_software_open_source %} This software is open source.{% endif %}--></li>
-                        
+                        {% if "Yes" in survey.q12_specialized_software %}
+                        <li>Specialized software required for accessing this products created is required. </li> 
+                        {% endif %}
+                        {% if "Yes" in survey.q11_specialized_software_open_source %}
+                        <li>Specialized software required is open source. </li> 
+                        {% endif %}
                         {% if "Yes" in survey.q19_api %}
                         <li>An API is provided. </li> 
                         {% endif %}
@@ -97,9 +90,7 @@
                         {% if "Yes" in survey.q233_smart_api %}
                         <li>The API is a Smart API. </li> 
                         {% endif %}
-                        {% if "Yes" in survey.q09_open_data %}
-                        <li>All data is open.</li>
-                        {% endif %}
+                        
                         {% if "Yes" in survey.q13_existing_libraries %}
                         <li>The project software is built on existing libraries.</li>
                         {% endif %}
@@ -119,6 +110,9 @@
                          {% if "Software and Associated Documentation" in survey.q01_products %}
                         <li>Code stored on github (and linked from the {{ survey.q02_project_name }} website).</li>
                         {% endif %}
+                        {% if "Simulation Data" in survey.q01_products_list %}
+                                Simulations will include {{ survey.q06_simulations }}.
+                            {% endif %}
                         <!-- <li>Both input and output data are in HDF5 format.</li> -->
                     </ul>
                 </td>
@@ -127,13 +121,16 @@
                 <td>Reusable</td>
                 <td>
                     <ul>
+                        {% if "Yes" in survey.q13_existing_libraries %}
+                        <li>Project software (re)uses existing libraries.</li>
+                        {% endif %}
                         {% if survey.q26_ML_models_shared %}
                         <li>ML models will be shared on {{ survey.q26_ML_models_shared }}.</li>
                         {% endif %}
                         {% if survey.q16_notebooks_shared %}
                         <li>Notebooks will be {{ survey.q16_notebooks_shared }}.</li> 
                         {% endif %} 
-                        {% if survey.q17_notebooks_template %}
+                        {% if "Yes" in survey.q17_notebooks_template %}
                         <li>Notebooks will be based on a notebook template.</li> 
                         {% endif %} 
                         {% if survey.q14_nano_publications %}
@@ -144,12 +141,20 @@
                         {% endif %}
                         {% if survey.q07_license %}
                         <li>A notice posted will designate research objects as licensed under 
-                            {% if "Other" in survey.q07_license %} 
+                        
+                        {% if "Other" in survey.q07_license %} 
                                 {% if survey.q08_license_other_institutional %}{{ survey.q08_license_other_institutional}}{% endif %}
                                 {% if survey.q08_license_other_none %}{{ survey.q08_license_other_none}}{% endif %}
                             {% else %}
                                 <a href="https://creativecommons.org/about/cclicenses/">{{ survey.q07_license }}</a>
                             {% endif %}.
+                            {% endif %}
+                        {% endif %}
+                         {% if if "Yes" in survey.q9_open_data %}
+                        <li>All data is open.</li>
+                        {% endif %}
+                        {% if survey.q18_software_license %}
+                        <li>All software is provided under {{ survey.q18_software_license }}.</li>
                         {% endif %}
                         {% if survey.q25_ML_repro %}
                         <li>Reproducibility implementation considerations for documenting analysis that includes ML will include {{ survey.q25_ML_repro }}.</li>

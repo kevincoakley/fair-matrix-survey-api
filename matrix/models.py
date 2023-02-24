@@ -71,7 +71,6 @@ class Survey(models.Model):
     q29_register_repo = models.CharField(max_length=256, default="", blank=True)
     q29_register_repo_other = models.CharField(max_length=256, default="", blank=True)
     q30_schema_org = models.CharField(max_length=256, default="", blank=True)
-    q30_schema_yes_other = models.CharField(max_length=256, default="", blank=True)
     q64_email_address = models.CharField(max_length=256, default="", blank=True)
     random_id = models.CharField(max_length=256, default="", blank=True)
     time_stamp = models.DateTimeField(auto_now_add=True)

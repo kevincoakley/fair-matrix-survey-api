@@ -67,7 +67,6 @@ class Survey(models.Model):
     )
     q27_domain_repo_other = models.CharField(max_length=256, default="", blank=True)
     q28_dmp = models.CharField(max_length=256, default="", blank=True)
-    q28_yes_specify = models.CharField(max_length=256, default="", blank=True)
     q29_register_repo = models.CharField(max_length=256, default="", blank=True)
     q29_register_repo_other = models.CharField(max_length=256, default="", blank=True)
     q30_schema_org = models.CharField(max_length=256, default="", blank=True)
